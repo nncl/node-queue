@@ -5,6 +5,8 @@ const kue = require('kue')
     , Queue = require('../modules/Queue')(queue)
     , Actions = {};
 
+Actions.showIndex = (req, res) => res.send('Ok');
+
 /**
  * @description
  * Add data to queue.
