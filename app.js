@@ -12,7 +12,8 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.static(__dirname + '/public'));
 
-load('controllers')
+load('models')
+    .then('controllers')
     .then('routes')
     .into(app);
 

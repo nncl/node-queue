@@ -2,22 +2,8 @@
 
 const kue = require('kue')
     , queue = kue.createQueue()
-    , Email = require('../modules/Email')
+    , Queue = require('../modules/Queue')(queue)
     , Actions = {};
-
-queue.process('email', (job, done) => {
-    Email.doSendEmail(job.data.to, done);
-});
-
-queue.on('job complete', (id, result) => {
-    kue.Job.get(id, function (err, job) {
-        if (err) return;
-        job.remove(function (err) {
-            if (err) throw err;
-            console.log('Remoção completa do job #%d', job.id, 'finalizada');
-        });
-    });
-});
 
 /**
  * @description
