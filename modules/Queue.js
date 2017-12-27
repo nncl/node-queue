@@ -12,9 +12,9 @@ module.exports = (queue) => {
     });
 
     queue.on('job complete', (id, result) => {
-        kue.Job.get(id, function (err, job) {
+        kue.Job.get(id, (err, job) => {
             if (err) return;
-            job.remove(function (err) {
+            job.remove((err) => {
                 if (err) throw err;
                 console.log('Remoção do job #%d', job.id, 'finalizada');
             });
