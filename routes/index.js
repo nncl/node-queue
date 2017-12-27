@@ -1,6 +1,10 @@
 "use strict";
 
+const apiUrl = '/api/v1';
+
 module.exports = function (app) {
     const home = app.controllers.home;
-    app.get('/', home.test);
+
+    // routes
+    app.post(apiUrl + '/queue', home.doAddToQueue);
 };

@@ -19,7 +19,9 @@
   },
   "homepage": "https://github.com/nncl/node-queue#readme",
   "dependencies": {
+    "body-parser": "^1.18.2",
     "express": "^4.16.2",
-    "express-load": "^1.1.16"
+    "express-load": "^1.1.16",
+    "kue": "^0.11.6"
   }
 }

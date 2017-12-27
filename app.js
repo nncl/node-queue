@@ -2,8 +2,15 @@
 
 let express = require('express')
     , app = express()
+    , bodyParser = require('body-parser')
     , load = require('express-load')
-    , port = 3000;
+    , port = process.env.PORT ? process.env.PORT : 3000;
+
+app.set('views', __dirname + '/views');
+app.set('view engine', 'ejs');
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: true }));
+app.use(express.static(__dirname + '/public'));
 
 load('controllers')
     .then('routes')
