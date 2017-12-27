@@ -18,7 +18,7 @@ Actions.doSendEmail = (address, done) => {
 
     console.log('Sending e-mail...', address);
 
-    setTimeout(function () {
+    setTimeout(() => {
         console.log('E-mail enviado com sucesso');
         done();
     }, 2000);
