@@ -1,3 +1,3 @@
 # Node Queue
 
-Working with queues with Node JS.
+Working with queues on Node JS.
