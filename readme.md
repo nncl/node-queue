@@ -4,6 +4,8 @@ Working with queues on Node JS.
 
 ## Getting Started
 
+First of all, duplicate the file `env.example.js` and rename to `env.js`. Next, add your own information.
+
 Development:
 
 ```

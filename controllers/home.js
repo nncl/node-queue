@@ -1,6 +1,7 @@
 "use strict";
 
 const kue = require('kue')
+    , env = require('../env')
     , queue = kue.createQueue()
     , Queue = require('../modules/Queue')(queue)
     , Actions = {};
@@ -17,14 +18,20 @@ Actions.showIndex = (req, res) => res.send('Ok');
 
 Actions.doAddToQueue = (req, res) => {
 
+    const attempts = env.queue.ATTEMPTS ? env.queue.ATTEMPTS : 5
+        , delay = env.queue.BACKOFF ? env.queue.BACKOFF : 60;
+
     let job = queue.create('email', {
         title: req.body.title
         , to: req.body.to
 
-    }).save((err) => {
-        if (err) return res.status(400).json(err);
-        res.send("Job " + job.id + " adicionado à fila");
-    });
+    })
+        .attempts(attempts)
+        .backoff({delay: delay * 1000, type: 'fixed'}) // FIXME
+        .save((err) => {
+            if (err) return res.status(400).json(err);
+            res.send("Job " + job.id + " adicionado à fila");
+        });
 
 };
 
