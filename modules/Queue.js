@@ -21,7 +21,7 @@ module.exports = (queue) => {
             , to: data.to
         })
             .attempts(attempts)
-            .backoff(true)
+            .backoff({delay: delay * 1000, type: 'fixed'})
             .save((err) => {
                 if (err) return d.reject(err);
                 d.resolve("Job " + job.id + " adicionado à fila");
@@ -56,10 +56,11 @@ module.exports = (queue) => {
         .on('job failed', (id) => {
             console.error('JOB FAILED', id);
 
+            // Criar um novo job a partir daqui, dessa forma acontecerá até dar certo
+            console.log('=============================================');
+            console.log('Lets create another job with the same content');
             kue.Job.get(id, (err, job) => {
                 if (err) return;
-
-                // Criar um novo job a partir daqui, dessa forma acontecerá até dar certo
                 const data = job.toJSON().data;
                 queue.doCreateJob(data);
             });
