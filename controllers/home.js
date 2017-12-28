@@ -3,10 +3,38 @@
 const kue = require('kue')
     , env = require('../env')
     , queue = kue.createQueue()
-    , Queue = require('../modules/Queue')(queue)
+    , Queue = require('../modules/Queue')(queue) // It's important to be instantiated like this
     , Actions = {};
 
 Actions.showIndex = (req, res) => res.send('Ok');
+
+/**
+ * @description
+ * Display failed jobs' information.
+ *
+ * @param req
+ * @param res
+ */
+
+Actions.showFailed = (req, res) => {
+    queue.failed((err, jobs) => {
+        res.json({err: err, jobs: jobs, total: jobs.length});
+    });
+};
+
+/**
+ * @description
+ * Display active jobs' information.
+ *
+ * @param req
+ * @param res
+ */
+
+Actions.showActive = (req, res) => {
+    queue.active((err, jobs) => {
+        res.json({err: err, jobs: jobs, total: jobs.length});
+    });
+};
 
 /**
  * @description
@@ -26,13 +54,11 @@ Actions.doAddToQueue = (req, res) => {
         , to: req.body.to
     })
         .attempts(attempts)
-        .backoff({delay: delay * 1000, type: 'fixed'}) // FIXME
+        .backoff({delay: delay * 1000, type: 'fixed'})
         .save((err) => {
             if (err) return res.status(400).json(err);
             res.send("Job " + job.id + " adicionado à fila");
         });
-
-    // TODO Verificar se existe alguma forma de attempts ser infinito até dar certo
 
 };
 

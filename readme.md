@@ -38,3 +38,35 @@ To execute this API's methods, check the following routes:
             "to" : "caue@dindigital.com"
         }
         ```
+
+- Retrieve failed jobs:
+    - Route: `GET /failed`
+    - Responses:
+        - 200: 
+    
+            ```
+            {
+                "err": null,
+                "jobs": [
+                    131,
+                    132
+                ],
+                "total": 2
+            }
+            ```
+
+- Retrieve active jobs:
+    - Route: `GET /active`
+    - Responses:
+        - 200: 
+    
+            ```
+            {
+                "err": null,
+                "jobs": [
+                    131,
+                    132
+                ],
+                "total": 2
+            }
+            ```

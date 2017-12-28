@@ -9,7 +9,7 @@ const kue = require('kue')
 module.exports = (queue) => {
     queue.process('email', (job, done) => {
         console.log('Vamos enviar o email. Job', job.id, '. Tentativa', job.toJSON().attempts.made + 1, 'de', job.toJSON().attempts.max);
-        const addressee = job.id >= 100 && job.id <= 200 ? null : job.data.to; // Simulando erro
+        const addressee = job.id >= 100 && job.id <= 300 ? null : job.data.to; // Simulando erro
         console.log('addressee', addressee);
         Email.doSendEmail(addressee, done);
     });
@@ -32,7 +32,6 @@ module.exports = (queue) => {
 
         .on('job failed', (id) => {
             console.error('JOB FAILED', id);
-            // TODO Verificar se ele ainda está na fila e se existe uma forma de attempts infinito.
         })
 
         .on('error', (err) => {

@@ -7,5 +7,7 @@ module.exports = function (app) {
 
     // routes
     app.get('/', home.showIndex);
+    app.get(apiUrl + '/failed', home.showFailed);
+    app.get(apiUrl + '/active', home.showActive);
     app.post(apiUrl + '/queue', home.doAddToQueue);
 };
