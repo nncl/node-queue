@@ -4,9 +4,9 @@ Working with queues on Node JS.
 
 ## Getting Started
 
-First of all, duplicate the file `env.example.js` and rename to `env.js`. Next, add your own information.
+First of all, duplicate the file `env.example.js` and rename it to `env.js`. Next, add your own information.
 
-Development:
+### Development
 
 ```
 npm run dev
@@ -15,7 +15,7 @@ PORT=<PORT-NUMBER> npm run dev
 
 Then access `http://localhost:3000` on your browser.
 
-Production:
+### Production
 
 ```
 npm start
@@ -38,4 +38,3 @@ To execute this API's methods, check the following routes:
             "to" : "caue@dindigital.com"
         }
         ```
-        

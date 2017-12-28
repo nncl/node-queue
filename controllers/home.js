@@ -24,7 +24,6 @@ Actions.doAddToQueue = (req, res) => {
     let job = queue.create('email', {
         title: req.body.title
         , to: req.body.to
-
     })
         .attempts(attempts)
         .backoff({delay: delay * 1000, type: 'fixed'}) // FIXME
@@ -32,6 +31,8 @@ Actions.doAddToQueue = (req, res) => {
             if (err) return res.status(400).json(err);
             res.send("Job " + job.id + " adicionado à fila");
         });
+
+    // TODO Verificar se existe alguma forma de attempts ser infinito até dar certo
 
 };
 
